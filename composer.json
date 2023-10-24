@@ -1,0 +1,21 @@
+{
+    "name": "nicolas/app-salon_php_mvc_js_sass",
+    "description": "Proyecto Php 8, MVC, SQL, SCSS, Gulp",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Nicolas\\AppSalonPhpMvcJsSass\\": "src/",
+            "Model\\": "./models",
+            "Controllers\\": "./controllers",
+            "MVC\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "nicolasb",
+            "email": "nicolasbotello@hotmail.com"
+        }
+    ],
+    "require": {}
+}
+
