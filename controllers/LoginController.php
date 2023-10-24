@@ -21,4 +21,8 @@ class LoginController{
     public static function recuperar(){
         echo 'desde recuperar';
     }
+    
+    public static function crear(){
+        echo 'desde crear';
+    }
 }
