@@ -12,6 +12,7 @@ CREATE TABLE usuarios(
     `apellido` VARCHAR(60) NULL,
     `imagen` VARCHAR(90),
     `email` VARCHAR(60) NULL,
+    `password` VARCHAR(90) NULL,
     `telefono` VARCHAR(10) NULL,
     `admin` TINYINT(1) NULL,
     `confirmado` TINYINT(1) NULL,
