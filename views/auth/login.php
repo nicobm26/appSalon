@@ -20,7 +20,7 @@
             name="password"
         />
     </div>
-    <input type="submit" value="Iniciar Sesion">
+    <input type="submit" class="boton" value="Iniciar Sesion">
 </form>
 <div class="acciones">
     <a href="/crear-cuenta">¿Aún no tienes una cuenta? Crear una</a>
