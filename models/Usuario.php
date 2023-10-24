@@ -51,8 +51,10 @@ class Usuario extends ActiveRecord{
             self::$alertas['error'][] = 'El numero de telefono solo puede tener 10 numeros';
         }
 
-        if( !empty($this->telefono)  && !filter_var($this->email, FILTER_VALIDATE_EMAIL)){
-            self::$alertas['error'][] = 'El correo tiene un formato invalido';
+        if(empty($this->email) ){
+            self::$alertas['error'][] = 'El correo es obligatorio';
+        }else if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            self::$alertas['error'][] = 'El correo no tiene el formato correcto';
         }
 
         if(!$this->password){
