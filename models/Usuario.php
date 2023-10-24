@@ -8,6 +8,8 @@ class Usuario extends ActiveRecord{
     protected static $tabla = 'usuarios';
     protected static $columnasDB = ['id','nombre','apellido','imagen','email','password','telefono','admin','confirmado','token'];
 
+    public static $e
+
     public $id;
     public $nombre;
     public $apellido;
@@ -30,5 +32,13 @@ class Usuario extends ActiveRecord{
         $this->admin = $args['admin'] ?? null;
         $this->confirmado = $args['confirmado'] ?? null;
         $this->token = $args['token'] ?? '';
+    }
+
+    // Mensajes de validacion para la creacion de una cuenta
+    public function validarNuevaCuenta(){
+        if(!$this->nombre){
+            self::$alertas['error'] = 'El nombre es obligatorio';
+        }
+
     }
 }
