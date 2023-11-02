@@ -7,7 +7,7 @@ class Router
     public array $getRoutes = [];
     public array $postRoutes = [];
 
-    public function get($url, $fn)
+    public function get(string $url, array $fn)
     {
         $this->getRoutes[$url] = $fn;
     }
@@ -39,8 +39,12 @@ class Router
 
 
         if ( $fn ) {
-            // Call user fn va a llamar una función cuando no sabemos cual sera
-            call_user_func($fn, $this); // This es para pasar argumentos
+            // Call_user_func va a llamar una función cuando no sabemos cual sera
+            call_user_func($fn, $this); // This es para pasar este router como argumento, a la funcion que se va llamar desde el $fn
+
+            // Ejemplo del Login get, el $fn seria el arreglo siguiente
+            // [0] = Controllers\LoginController
+            // [1] = Login
         } else {
             echo "Página No Encontrada o Ruta no válida";
         }
