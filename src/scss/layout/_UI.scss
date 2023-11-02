@@ -24,7 +24,12 @@
 }
 
 .nombre-pagina{
-    margin: 5rem 0;
+    @include m.telefono320{
+        margin: 2rem 0;
+    }
+    @include m.tablet{
+        margin: 5rem 0;
+    }
     font-weight: v.$bold;
     text-align: center;
 }
