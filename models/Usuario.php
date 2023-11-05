@@ -82,6 +82,7 @@ class Usuario extends ActiveRecord{
     }
 
     public function crearToken(){
-        $this->token = uniqid();
+        // $this->token = uniqid();
+        $this->token = bin2hex(random_bytes(8)); // "8" genera un string aleatorio de 16 caracteres, un poco mas seguro
     }
 }
