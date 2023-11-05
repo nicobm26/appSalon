@@ -36,9 +36,11 @@ class LoginController{
                 $resultado = $usuario->existeUsario();
                 if($resultado->num_rows){
                     $alertas = Usuario::getAlertas();
+                }else{
+                    // hashear Password
+                    $usuario->hashPassword();
+                    debuguear($usuario);
                 }
-                // No esta registrado
-                echo "no esta registrado";
             }
         }
         $router->render('auth/crear-cuenta',[
