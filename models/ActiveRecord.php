@@ -125,7 +125,8 @@ class ActiveRecord {
 
     // Busca un registro por una columna y un valor asociado
     public static function where($columna, $valor) {
-        $query = "SELECT * FROM " . static::$tabla  ." WHERE $columna = '$valor'";
+        $query = "SELECT * FROM " . static::$tabla  ." WHERE TRIM($columna)='$valor'";
+        //debuguear($query);
         $resultado = self::consultarSQL($query);
         return array_shift( $resultado ) ;
     }
