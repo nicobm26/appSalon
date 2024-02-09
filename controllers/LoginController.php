@@ -69,4 +69,28 @@ class LoginController{
     public static function mensaje(Router $router){
         $router->render('auth/mensaje');
     }   
+
+    public static function confirmar(Router $router){
+        
+        $alertas = [];
+        $token=s($_GET['token']);
+        $usuario = Usuario::where('token',$token);
+        // debuguear($usuario);
+        if(empty($usuario)){
+            //mostrar mensaje de error
+            Usuario::setAlerta('error' , 'token no valido');
+        }else{
+            // Modificar a usuario confirmado
+            $usuario->confirmado = '1';
+            $usuario->token = null;
+            $usuario->guardar();
+            // debuguear($usuario);
+            Usuario::setAlerta('exito', 'Cuenta Comprobada Correctamente');
+        }
+
+        $alertas = Usuario::getAlertas();
+        $router->render('auth/confirmar-cuenta', [
+            'alertas'=> $alertas
+        ]);
+    }
 }
