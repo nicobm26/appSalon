@@ -25,7 +25,12 @@ class LoginController{
                     //Existe Usuario, Proseguir a verificar password                       
                     if( $usuario->comprobarPasswordAndVerificado($auth->password)){
                         //Autenticar el usuario
-                        session_start();
+                        if(!isset($_SESSION)) {  
+                            //Pregunto si ya esta definida PORQUE por el momento ya se definio en el archivo router.php
+                            //en teoria como el router se ejecuta primero, entonces ya la sesion fue iniciada, y si no hago
+                            // este if puede saldria la advertencia de que la sesion ya fue iniciada
+                            session_start();
+                        }
                         $_SESSION['id'] = $usuario->id;
                         $_SESSION['nombre'] = $usuario->nombre . " " . $usuario->apellido;
                         $_SESSION['email'] = $usuario->email;
@@ -34,9 +39,9 @@ class LoginController{
                         //Redireccionamiento
                         if($usuario->admin === "1"){
                             $_SESSION['admin'] = $usuario->admin ?? null;
-                            header("Location: /admin");
+                            // header("Location: /admin");
                         }else{
-                            header("Location: /cita");
+                            // header("Location: /cita");
                         }
                         debuguear($_SESSION);
 
