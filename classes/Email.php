@@ -51,7 +51,7 @@ class Email{
         $mail->Body = $contenido;
 
         // Enviar correo
-        $mail->send();
+        //$mail->send();
 
 
         //send the message, check for errors
