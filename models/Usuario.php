@@ -83,6 +83,15 @@ class Usuario extends ActiveRecord{
         return self::$alertas;
     }
 
+    public function validarEmail(){        
+        if(empty($this->email) ){
+            self::$alertas['error'][] = 'El correo es obligatorio';
+        }else if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            self::$alertas['error'][] = 'El correo no tiene el formato correcto';
+        }
+        return self::$alertas;
+    }
+
     public function existeUsario(){
         $query = "SELECT * FROM " . self::$tabla . " WHERE email = '" . $this->email . "' LIMIT 1";
         // debuguear($query);
