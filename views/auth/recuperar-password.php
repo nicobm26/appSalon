@@ -14,11 +14,10 @@
             id="password"
             name="password"
             placeholder="Tu Nuevo Password"
-
         />
     </div>
 
-    <input type="submit" value="Guardar" class="boton">
+    <input type="submit" class="boton" value="Guardar Nuevo Password">
 
 </form>
 
