@@ -2,6 +2,12 @@
 <p class="descripcion-pagina">Elige tus servicios y coloca tus datos</p>
 
 <div id="app">
+    <div class="tabs">
+        <button type="button" class="actual" data-paso="1">Servicios</button>
+        <button type="button" data-paso="1">información Cita</button>
+        <button type="button" data-paso="3">Resumen</button>
+    </div>
+
     <div id="paso-1" class="seccion">
         <h2>Servicios</h2>
         <p class="text-center">Elige tus servicios a continuación</p>
@@ -46,4 +52,23 @@
         <p>Verifica que la información sea correcta</p>
     </div>
 
+    <div class="paginacion">
+        <button id="anterior" class="boton">
+            &laquo; Anterior 
+        </button>
+
+        <button id="siguiente" class="boton">
+            Siguiente &raquo;
+        </button>
+
+    </div>
+
 </div>
+
+
+<?php
+
+    $script = "
+    <script src='build/js/app.js'> </script> 
+    ";
+?>
