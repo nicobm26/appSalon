@@ -92,6 +92,14 @@ class Usuario extends ActiveRecord{
         return self::$alertas;
     }
 
+    public function validarPassword(){
+        if(!$this->password){
+            self::$alertas['error'][] = 'La contraseña es obligatoria';
+        }else if( !preg_match("/^(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){5,})(?=(?:.*[0-9]){1})/", $this->password)){
+            self::$alertas['error'][] = "La contraseña no es válida. Debe contener al menos 5 letras minúsculas, un número y una letra mayúscula.";
+        }
+    }
+
     public function existeUsario(){
         $query = "SELECT * FROM " . self::$tabla . " WHERE email = '" . $this->email . "' LIMIT 1";
         // debuguear($query);
