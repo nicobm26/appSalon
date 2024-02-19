@@ -8,6 +8,8 @@ function iniciarApp(){
     mostrarSeccion();  //muestra y oculta secciones
     tabs(); //Cambia la seccion cuando se presiona los tabs
     botonesPaginador(); //agrega o quita los botones del paginador
+    paginaSiguiente();
+    paginaAnterior();
 }
 
 function mostrarSeccion(){
@@ -38,6 +40,23 @@ function tabs(){
         boton.addEventListener('click', (e)=>{
             paso = parseInt(e.target.dataset.paso); 
             mostrarSeccion();
+            botonesPaginador();
         })
     })
+}
+
+function botonesPaginador(){
+    
+    const paginaAnterior = document.querySelector("#anterior");   
+    const paginaSiguiente = document.querySelector("#siguiente");
+    
+    if(paso === 1){
+        paginaAnterior.classList.add('ocultar');
+    }else if(paso === 3){
+        paginaAnterior.classList.remove('ocultar');     
+        paginaSiguiente.classList.add('ocultar');           
+    }else{
+        paginaAnterior.classList.remove('ocultar');
+        paginaSiguiente.classList.remove('ocultar');
+    }
 }
