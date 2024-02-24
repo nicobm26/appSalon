@@ -25,6 +25,8 @@ function iniciarApp(){
     nombreCliente(); //Añande el nombre del cliente al objeto cita
     seleccionarFecha(); //Añade la fecha de la cita en el objeto
     seleccionarHora();
+
+    mostrarResumen(); //Muestra el resumen de la cita
 }
 
 function mostrarSeccion(){
@@ -68,8 +70,10 @@ function botonesPaginador(){
     if(paso === 1){
         paginaAnterior.classList.add('ocultar');
     }else if(paso === 3){
-        paginaAnterior.classList.remove('ocultar');     
-        paginaSiguiente.classList.add('ocultar');           
+        paginaAnterior.classList.remove('ocultar');
+        paginaSiguiente.classList.add('ocultar');
+        
+        mostrarResumen();
     }else{
         paginaAnterior.classList.remove('ocultar');
         paginaSiguiente.classList.remove('ocultar');
@@ -170,7 +174,7 @@ function seleccionarFecha(){
         const dia = new Date(evento.target.value).getUTCDay();
         if([6,0].includes(dia)){
             evento.target.value ='';
-            mostrarMensaje('Fines de semana No permitido' , 'error');
+            mostrarMensaje('Fines de semana No permitido' , 'error', '.formulario');
         }else{
             cita.fecha = evento.target.value;
         }  
@@ -182,10 +186,9 @@ function seleccionarHora(){
     //evento, callback
     inputHora.addEventListener('input', function(e) {
         const horaCita = e.target.value;
-        const hora = horaCita.split(":")[0];
-        const minutos = horaCita.split(":")[1];
+        const hora = horaCita.split(":")[0];      
         if(hora< 9 || hora>20){
-            mostrarMensaje("Hora no valida","error")
+            mostrarMensaje("Hora no valida","error", '.formulario');
             e.target.value="";
         }else{
             cita.hora = e.target.value;
@@ -193,11 +196,13 @@ function seleccionarHora(){
     })
 }
 
-function mostrarMensaje(mensaje, tipo){
+function mostrarMensaje(mensaje, tipo, elemento, desaparece=true){
 
     //Previene que se genere mas de una alerta
     const alertaPrevia = document.querySelector('.alerta');
-    if(alertaPrevia) return;
+    if(alertaPrevia){
+        alertaPrevia.remove();
+    }
 
     //Scripting para crear la alerta
     const alerta = document.createElement('DIV');
@@ -205,11 +210,64 @@ function mostrarMensaje(mensaje, tipo){
     alerta.classList.add('alerta');
     alerta.classList.add(tipo);
 
-    const formulario = document.querySelector(".formulario");
-    formulario.appendChild(alerta);
+    const referencia = document.querySelector(elemento);
+    referencia.appendChild(alerta);
 
-    //Eliminar la alerta despues de cierto tiempo
-    setTimeout(()=>{
-        alerta.remove();
-    }, 3000);
+    if(desaparece){
+        //Eliminar la alerta despues de cierto tiempo
+        setTimeout(()=>{
+            alerta.remove();
+        }, 3000);
+    }   
+}
+
+
+function mostrarResumen(){
+    const resumen = document.querySelector(".contenido-resumen");   
+
+    //Limpiar el contenido de resumen
+    while(resumen.firstChild){
+        resumen.removeChild(resumen.firstChild)
+    }
+
+    if(Object.values(cita).includes('') || cita.servicios.length === 0){
+        mostrarMensaje("Faltan Datos de servicios, fecha u hora", 'error', '.contenido-resumen', false);
+        return;
+    }
+
+    //Scripting
+    //En este punto ya se que cita tiene todos los valores llenos (nombre,fecha,hora,servicios)
+    const {nombre, fecha, hora, servicios } = cita;
+
+    const nombreCliente = document.createElement('P');
+    nombreCliente.innerHTML = `<span>Nombre:</span> ${nombre}`;
+
+    const fechaCliente = document.createElement('P');
+    fechaCliente.innerHTML = `<span>Fecha:</span> ${fecha}`;
+
+    const horaCliente = document.createElement('P');
+    horaCliente.innerHTML = `<span>Hora:</span> ${hora}`;
+
+    resumen.appendChild(nombreCliente);
+    resumen.appendChild(fechaCliente);
+    resumen.appendChild(horaCliente);
+
+    servicios.forEach(servicio => {
+        const {precio, nombre} = servicio;
+        
+        const contenedorServicio = document.createElement('DIV');
+        contenedorServicio.classList.add('contenedor-servicio');
+
+        const textoServicio = document.createElement('P');
+        textoServicio.textContent = nombre;
+
+        const precioServicio = document.createElement('P');
+        precioServicio.innerHTML = `<span;>Precio: </span> ${precio}`;
+
+        contenedorServicio.appendChild(textoServicio);
+        contenedorServicio.appendChild(precioServicio);
+
+        resumen.appendChild(contenedorServicio);
+    })
+
 }
