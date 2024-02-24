@@ -222,6 +222,31 @@ function mostrarMensaje(mensaje, tipo, elemento, desaparece=true){
 }
 
 
+
+
+function formatearHora(hora){
+
+    console.log(hora);
+    // Obtener horas y minutos
+    let hours = hora.split(':')[0];
+    let minutes = hora.split(':')[1];
+
+    // Determinar si es AM o PM
+    const meridiem = hours >= 12 ? 'PM' : 'AM';
+
+    // Convertir horas al formato de 12 horas
+    hours = hours % 12 || 12; // Si es 0, lo convertimos a 12
+
+    // Agregar un 0 delante de los minutos si son menores que 10
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+
+    // Construir la cadena de tiempo en formato de 12 horas
+    const time12h = `${hours}:${minutes} ${meridiem}`;
+
+    return time12h;
+}
+
+
 function mostrarResumen(){
     const resumen = document.querySelector(".contenido-resumen");   
 
@@ -269,18 +294,35 @@ function mostrarResumen(){
     headingCitas.textContent = 'Resumen de Cita';
     resumen.appendChild(headingCitas);
 
-    const {nombre, fecha, hora } = cita;
-
+    const {nombre, fecha, hora} = cita;
+    
     const nombreCliente = document.createElement('P');
     nombreCliente.innerHTML = `<span>Nombre:</span> ${nombre}`;
 
+    //Formatear fecha 
+    //Observacion: cada que se crea el date con un string, hay un desfase de 1 en el dia
+    fechaObjet = new Date(fecha);
+    fechaObjet.setDate(fechaObjet.getDate() + 1);
+    const opciones = {weekday:'long', year:'numeric' , month:'long', day:'numeric'}
+    const fechaFormateada = fechaObjet.toLocaleDateString('es-CO', opciones);
+
+    const hora12h = formatearHora(hora);
+    
     const fechaCliente = document.createElement('P');
-    fechaCliente.innerHTML = `<span>Fecha:</span> ${fecha}`;
+    fechaCliente.innerHTML = `<span>Fecha:</span> ${fechaFormateada}`;
 
     const horaCliente = document.createElement('P');
-    horaCliente.innerHTML = `<span>Hora:</span> ${hora}`;
+    horaCliente.innerHTML = `<span>Hora:</span> ${hora12h}`;
 
     resumen.appendChild(nombreCliente);
     resumen.appendChild(fechaCliente);
     resumen.appendChild(horaCliente);
 }
+
+
+
+
+
+
+
+
