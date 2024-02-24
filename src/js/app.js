@@ -237,7 +237,39 @@ function mostrarResumen(){
 
     //Scripting
     //En este punto ya se que cita tiene todos los valores llenos (nombre,fecha,hora,servicios)
-    const {nombre, fecha, hora, servicios } = cita;
+   
+    //Heading para servicios en resumen
+    const headingServicios = document.createElement('H2');
+    headingServicios.textContent = 'Resumen de Servicios';
+    resumen.appendChild(headingServicios);
+    
+
+    const {servicios} = cita;
+    //Iterando y mostrando los servicios
+    servicios.forEach(servicio => {
+        const {precio, nombre} = servicio;
+        
+        const contenedorServicio = document.createElement('DIV');
+        contenedorServicio.classList.add('contenedor-servicio');
+
+        const textoServicio = document.createElement('P');
+        textoServicio.textContent = nombre;
+
+        const precioServicio = document.createElement('P');
+        precioServicio.innerHTML = `<span>Precio: </span> ${precio}`;
+
+        contenedorServicio.appendChild(textoServicio);
+        contenedorServicio.appendChild(precioServicio);
+
+        resumen.appendChild(contenedorServicio);
+    })
+
+    //Heading para cita en resumen
+    const headingCitas = document.createElement('H2');
+    headingCitas.textContent = 'Resumen de Cita';
+    resumen.appendChild(headingCitas);
+
+    const {nombre, fecha, hora } = cita;
 
     const nombreCliente = document.createElement('P');
     nombreCliente.innerHTML = `<span>Nombre:</span> ${nombre}`;
@@ -251,23 +283,4 @@ function mostrarResumen(){
     resumen.appendChild(nombreCliente);
     resumen.appendChild(fechaCliente);
     resumen.appendChild(horaCliente);
-
-    servicios.forEach(servicio => {
-        const {precio, nombre} = servicio;
-        
-        const contenedorServicio = document.createElement('DIV');
-        contenedorServicio.classList.add('contenedor-servicio');
-
-        const textoServicio = document.createElement('P');
-        textoServicio.textContent = nombre;
-
-        const precioServicio = document.createElement('P');
-        precioServicio.innerHTML = `<span;>Precio: </span> ${precio}`;
-
-        contenedorServicio.appendChild(textoServicio);
-        contenedorServicio.appendChild(precioServicio);
-
-        resumen.appendChild(contenedorServicio);
-    })
-
 }
