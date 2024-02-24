@@ -225,8 +225,6 @@ function mostrarMensaje(mensaje, tipo, elemento, desaparece=true){
 
 
 function formatearHora(hora){
-
-    console.log(hora);
     // Obtener horas y minutos
     let hours = hora.split(':')[0];
     let minutes = hora.split(':')[1];
@@ -295,7 +293,7 @@ function mostrarResumen(){
     resumen.appendChild(headingCitas);
 
     const {nombre, fecha, hora} = cita;
-    
+
     const nombreCliente = document.createElement('P');
     nombreCliente.innerHTML = `<span>Nombre:</span> ${nombre}`;
 
@@ -314,11 +312,27 @@ function mostrarResumen(){
     const horaCliente = document.createElement('P');
     horaCliente.innerHTML = `<span>Hora:</span> ${hora12h}`;
 
+
+    //Boton para crear cita
+    const botonReservar = document.createElement('BUTTON');
+    botonReservar.classList.add('boton');
+    botonReservar.textContent = 'Reservar Cita';
+    // botonReservar.onclick = reservarCita;
+
+    botonReservar.addEventListener('click', reservarCita);
+
     resumen.appendChild(nombreCliente);
     resumen.appendChild(fechaCliente);
     resumen.appendChild(horaCliente);
+
+    resumen.appendChild(botonReservar);
 }
 
+
+function reservarCita(){
+    console.log('reservando...')
+
+}
 
 
 
