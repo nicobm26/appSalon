@@ -45,6 +45,8 @@
                     id="hora"             
                 />
             </div>
+
+            <input type="hidden" name="id" value="">
         </div>  
     </div>
 
