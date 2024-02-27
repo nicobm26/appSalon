@@ -163,7 +163,7 @@ function seleccionarServicio(servicio){
         servicioDiv.classList.add('seleccionado');
     }
     
-    console.log(cita);    
+    // console.log(cita);    
 }
 
 function idCliente(){
@@ -345,26 +345,38 @@ async function reservarCita(){
 
     //petición hacia la api
 
-    const url = "http://localhost:3000/api/citas";
+    try {
+        const url = "http://localhost:3000/api/citas";
 
-    const respuesta = await fetch(url, {
-        method: 'POST',
-        body: datos
-    });
+        const respuesta = await fetch(url, {
+            method: 'POST',
+            body: datos
+        });
 
-    const resultado = await respuesta.json();
-
-    console.log(resultado);
-    if(resultado.resultado){
+        const resultado = await respuesta.json();
+        // console.log(resultado);
+        if(resultado.resultado){
+            Swal.fire({
+                icon: 'success',
+                title: 'Cita Creada',
+                text: 'Tu cita fue creada correctamente',
+                button: 'OK'
+            }).then( () =>{
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);                
+            });
+        }
+    } catch (error) {
         Swal.fire({
-            icon: 'success',
-            title: 'Cita Creada',
-            text: 'Tu cita fue creada correctamente',
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un error ',
             button: 'OK'
-          }).then( () =>{
-            window.location.reload();
-          });
+        })
     }
+
+    
 
 }
 
