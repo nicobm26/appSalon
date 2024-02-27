@@ -3,6 +3,7 @@ const pasoInicial=1;
 const pasoFinal=3;
 
 const cita= {
+    id: '',
     nombre: '',
     fecha: '',
     hora: '',
@@ -22,6 +23,7 @@ function iniciarApp(){
 
     consultarAPI();  //Consulta la API en el backend de PHP
     
+    idCliente();
     nombreCliente(); //Añande el nombre del cliente al objeto cita
     seleccionarFecha(); //Añade la fecha de la cita en el objeto
     seleccionarHora();
@@ -164,6 +166,10 @@ function seleccionarServicio(servicio){
     console.log(cita);    
 }
 
+function idCliente(){
+    cita.id = document.querySelector('#id').value;
+}
+
 function nombreCliente(){
     cita.nombre = document.querySelector('#nombre').value;
 }
@@ -220,8 +226,6 @@ function mostrarMensaje(mensaje, tipo, elemento, desaparece=true){
         }, 3000);
     }   
 }
-
-
 
 
 function formatearHora(hora){
@@ -317,9 +321,9 @@ function mostrarResumen(){
     const botonReservar = document.createElement('BUTTON');
     botonReservar.classList.add('boton');
     botonReservar.textContent = 'Reservar Cita';
-    // botonReservar.onclick = reservarCita;
+    botonReservar.onclick = reservarCita;
 
-    botonReservar.addEventListener('click', reservarCita);
+    // botonReservar.addEventListener('click', reservarCita);
 
     resumen.appendChild(nombreCliente);
     resumen.appendChild(fechaCliente);
@@ -329,8 +333,38 @@ function mostrarResumen(){
 }
 
 
-function reservarCita(){
-    console.log('reservando...')
+async function reservarCita(){    
+    const datos = new FormData;
+    const {id, fecha, hora, servicios} = cita;
+    const idServicios = servicios.map( servicio => servicio.id);
+    
+    datos.append('usuarioId', id)
+    datos.append('fecha', fecha)
+    datos.append('hora', hora)    
+    datos.append('servicios', idServicios)
+
+    //petición hacia la api
+
+    const url = "http://localhost:3000/api/citas";
+
+    const respuesta = await fetch(url, {
+        method: 'POST',
+        body: datos
+    });
+
+    const resultado = await respuesta.json();
+
+    console.log(resultado);
+    if(resultado.resultado){
+        Swal.fire({
+            icon: 'success',
+            title: 'Cita Creada',
+            text: 'Tu cita fue creada correctamente',
+            button: 'OK'
+          }).then( () =>{
+            window.location.reload();
+          });
+    }
 
 }
 

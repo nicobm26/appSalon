@@ -46,7 +46,7 @@
                 />
             </div>
 
-            <input type="hidden" name="id" value="">
+            <input type="hidden" id="id" name="id" value= "<?php echo $_SESSION['id'] ?>">
         </div>  
     </div>
 
@@ -72,6 +72,7 @@
 <?php
 
     $script = "
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js'></script>
     <script src='build/js/app.js'> </script> 
     ";
 ?>
