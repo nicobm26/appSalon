@@ -31,3 +31,13 @@ a {
 img {
     max-width: 100%;
 }
+
+.swal2-popup {
+    font-family: v.$fuente_principal;
+    h1,h2,h3{
+        font-size: 3rem !important;
+    }
+    p,div,button{
+        font-size: 1.6rem !important;
+    }    
+}
