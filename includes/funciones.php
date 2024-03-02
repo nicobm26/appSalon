@@ -22,7 +22,7 @@ function esUltimo(string $actual, string $proximo): bool{
 
 function isAuth(): void{
     if(!isset($_SESSION['login'])){
-        header('Locaction: /');
+        header('Location: /');
     }
 }
 
@@ -30,6 +30,6 @@ function isAdmin(): void{
     isAuth();
     // debuguear($_SESSION); // vacioo
     if(!isset($_SESSION['admin']) || empty($_SESSION)){
-        header('Locaction: /');
+        header('Location: /');
     }
 }
