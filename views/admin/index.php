@@ -51,7 +51,10 @@
 
             if(esUltimo($actual, $proximo)){ ?>
                 <p class="total">Total: <span> <?php echo number_format($total, 0, ',', '.'); ?></span></p>
-            
+                <form method='POST' action="/api/eliminar" id="formEliminarCita">
+                    <input type="hidden" name="id" value="<?php echo $cita->id?>">
+                    <input type="submit" class="boton-eliminar" value="Eliminar" onclick="confirmDelete(event, 'formEliminarCita')">
+                </form>
             <?php
             }
         ?>
@@ -60,5 +63,10 @@
 </div>
 
 <?php 
-    $script = "<script src='build/js/buscador.js'> </script>";
+    $script = "
+    <script src='build/js/alertas.js'></script>
+    <script src='build/js/buscador.js'> </script>
+    <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+    <script src='https://kit.fontawesome.com/d74a8aa5fa.js' crossorigin='anonymous'></script>
+    ";
 ?>
