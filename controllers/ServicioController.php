@@ -6,28 +6,36 @@ use MVC\Router;
 
 class ServicioController{
     public static function index(Router $router){
+        $nombre = $_SESSION['nombre'];
         $router->render('/servicios/index',[
-            
+            'nombre'=> $nombre
         ]);
     }
 
     public static function crear(Router $router){
-        echo "para crear";
-        if($_SERVER['REQUES_METHOD' ]==='POST'){
+        $nombre = $_SESSION['nombre'];
+        if($_SERVER['REQUEST_METHOD' ]==='POST'){
 
         }
+        
+        $router->render('/servicios/crear',[
+            'nombre'=> $nombre
+        ]);
     }
 
     public static function actualizar(Router $router){
-        echo "para Actualizar";
-        if($_SERVER['REQUES_METHOD' ]==='POST'){
+        $nombre = $_SESSION['nombre'];
+        if($_SERVER['REQUEST_METHOD' ]==='POST'){
             
         }
+        $router->render('/servicios/actualizar',[
+            'nombre'=> $nombre
+        ]);
     }
 
     public static function eliminar(Router $router){
         echo "para Eliminar";
-        if($_SERVER['REQUES_METHOD' ]==='POST'){
+        if($_SERVER['REQUEST_METHOD' ]==='POST'){
             
         }
     }
