@@ -59,10 +59,12 @@ class ServicioController{
         ]);
     }
 
-    public static function eliminar(Router $router){
-        echo "para Eliminar";
+    public static function eliminar(Router $router){        
         if($_SERVER['REQUEST_METHOD' ]==='POST'){
-            
+            $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
+            $servicio = Servicio::find($id);            
+            $servicio->eliminar();
+            header('Location: /servicios');
         }
     }
 }
