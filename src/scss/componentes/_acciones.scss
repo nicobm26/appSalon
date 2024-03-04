@@ -2,10 +2,11 @@
 @use 'base/mixins' as m;
 
 .acciones{
-    margin-top: v.$separacion;
+    margin-top: v.$separacion;    
     @include m.tablet{
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
     a{
         color: v.$blanco;
