@@ -8,9 +8,11 @@ use MVC\Router;
 class ServicioController{
     public static function index(Router $router){
         $nombre = $_SESSION['nombre'];
+        $servicios = Servicio::all();
         
         $router->render('/servicios/index',[        
-            'nombre'=> $nombre,         
+            'nombre'=> $nombre,
+            'servicios' => $servicios
         ]);
     }
 
