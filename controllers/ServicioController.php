@@ -7,6 +7,7 @@ use MVC\Router;
 
 class ServicioController{
     public static function index(Router $router){
+        isAdmin();
         $nombre = $_SESSION['nombre'];
         $servicios = Servicio::all();
         
@@ -17,6 +18,7 @@ class ServicioController{
     }
 
     public static function crear(Router $router){
+        isAdmin();
         $nombre = $_SESSION['nombre'];
         $servicio = new Servicio();
         $alertas=[];
@@ -38,6 +40,7 @@ class ServicioController{
     }
 
     public static function actualizar(Router $router){
+        isAdmin();
         $nombre = $_SESSION['nombre'];
         $id = filter_var($_GET['id'], FILTER_VALIDATE_INT);        
         if(! $id) return;
@@ -59,7 +62,8 @@ class ServicioController{
         ]);
     }
 
-    public static function eliminar(Router $router){        
+    public static function eliminar(Router $router){      
+        isAdmin();  
         if($_SERVER['REQUEST_METHOD' ]==='POST'){
             $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
             $servicio = Servicio::find($id);            
