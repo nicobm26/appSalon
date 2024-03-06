@@ -24,14 +24,14 @@ class Email{
         //Crear el objeto de mailer
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = '76687eb518b86b';
-        $mail->Password = 'f893e2e4139fb8';
+        $mail->Port =  $_ENV['EMAIL_PORT'];
+        $mail->Username =  $_ENV['EMAIL_USER'];
+        $mail->Password =  $_ENV['EMAIL_PASS'];
 
 
-        $mail->setFrom("nicobomen32@gmail.com");
+        $mail->setFrom("cuentaSalon@gmail.com");
         $mail->addAddress("cuenta1@gmail.com", 'AppSalon.com');
         $mail->Subject = "Confirmar tu cuenta";
 
@@ -43,7 +43,7 @@ class Email{
         $contenido = "<html>";
         $contenido .= "<p><strong>Hola ". $this->nombre ."</strong> Has creado
         tu cuenta en AppSalon, solo debes confirmarla presionando el siguiente enlace</p>";
-        $contenido .= "<p>Presiona aqui: <a href='http://localhost:3000/confirmar-cuenta?token="
+        $contenido .= "<p>Presiona aqui: <a href='" . $_ENV['APP_URL'] . "/confirmar-cuenta?token="
         . $this->token . "'>Confirmar Cuenta</a> </p>";
         $contenido .= "<p> Si tu no soliciste esta cuenta, puedes ignorar el mensaje </p>";
         $contenido .= "</html>";
@@ -66,11 +66,11 @@ class Email{
          //Crear el objeto de mailer
          $mail = new PHPMailer();
          $mail->isSMTP();
-         $mail->Host = 'sandbox.smtp.mailtrap.io';
+         $mail->Host = $_ENV['EMAIL_HOST'];
          $mail->SMTPAuth = true;
-         $mail->Port = 2525;
-         $mail->Username = '76687eb518b86b';
-         $mail->Password = 'f893e2e4139fb8';
+         $mail->Port = $_ENV['EMAIL_PORT'];
+         $mail->Username = $_ENV['EMAIL_USER'];
+         $mail->Password = $_ENV['EMAIL_PASS'];
  
  
          $mail->setFrom("nicobomen32@gmail.com");
@@ -84,7 +84,7 @@ class Email{
  
          $contenido = "<html>";
          $contenido .= "<p><strong>Hola ". $this->nombre ."</strong> Has solicitado reestablecer tu contraseña, sigue el siguiente enlace para hacerlo</p>";
-         $contenido .= "<p>Presiona aqui: <a href='http://localhost:3000/recuperar?token="
+         $contenido .= "<p>Presiona aqui: <a href='" . $_ENV['APP_URL'] . "/recuperar?token="
          . $this->token . "'>Reestablecer Cuenta</a> </p>";
          $contenido .= "<p> Si tu no soliciste esta cambio, puedes ignorar el mensaje </p>";
          $contenido .= "</html>";
