@@ -98,6 +98,7 @@ class Usuario extends ActiveRecord{
         }else if( !preg_match("/^(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){5,})(?=(?:.*[0-9]){1})/", $this->password)){
             self::$alertas['error'][] = "La contraseña no es válida. Debe contener al menos 5 letras minúsculas, un número y una letra mayúscula.";
         }
+        return self::$alertas;
     }
 
     public function existeUsario(){
