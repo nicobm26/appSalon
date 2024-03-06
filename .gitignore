@@ -1,13 +1,5 @@
 node_modules/
-
 vendor/
-
-public/build/
-
-src/img/
-
 includes/.env
-
 database.sql
-
 .DS_Store
