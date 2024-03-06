@@ -28,11 +28,12 @@ class Email{
         $mail->SMTPAuth = true;
         $mail->Port =  $_ENV['EMAIL_PORT'];
         $mail->Username =  $_ENV['EMAIL_USER'];
+        // $mail->SMTPSecure ='ssl';    //Sirve pero cuando lo hago desde gmail
         $mail->Password =  $_ENV['EMAIL_PASS'];
 
 
-        $mail->setFrom("cuentaSalon@gmail.com");
-        $mail->addAddress("cuenta1@gmail.com", 'AppSalon.com');
+        $mail->setFrom("nicobomen32@gmail.com","AppSalon.com");
+        $mail->addAddress($this->email , $this->nombre);
         $mail->Subject = "Confirmar tu cuenta";
 
         // Indicar que el correo va enviar en formato html
@@ -71,10 +72,11 @@ class Email{
          $mail->Port = $_ENV['EMAIL_PORT'];
          $mail->Username = $_ENV['EMAIL_USER'];
          $mail->Password = $_ENV['EMAIL_PASS'];
+        //  $mail->SMTPSecure ='ssl'; //Sirve pero cuando lo hago desde gmail
  
  
-         $mail->setFrom("nicobomen32@gmail.com");
-         $mail->addAddress("cuenta1@gmail.com", 'AppSalon.com');
+         $mail->setFrom("nicobomen32@gmail.com", "Appsalon");
+         $mail->addAddress($this->email , $this->nombre);
          $mail->Subject = "Reestablece tu cuenta";
  
          // Indicar que el correo va enviar en formato html
