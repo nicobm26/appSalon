@@ -9,3 +9,5 @@ src/img/
 includes/.env
 
 database.sql
+
+.DS_Store
