@@ -7,3 +7,5 @@ public/build/
 src/img/
 
 includes/.env
+
+database.sql
